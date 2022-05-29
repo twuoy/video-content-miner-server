@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  yt-content-miner:
+    image: video-content-miner:${VERSION}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure:3
+    ports:
+        - "50000:5000"
+    logging:
+      options:
+        max-size: "100k"
+        max-file: "3"
+
+networks:
+  server:
+    name: miner-net
+    driver: bridge
